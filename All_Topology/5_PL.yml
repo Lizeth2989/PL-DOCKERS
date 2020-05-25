@@ -1,0 +1,17 @@
+links:
+  - endpoints: ["sw-1:eth0", "sw-2:eth0", "usr-1:eth0", "usr-2:eth0", "usr-3:eth0", "ctr:eth0"]
+    driver: bridge
+  - endpoints: ["sw-1:eth2", "usr-2:eth1"]
+  - endpoints: ["sw-2:eth1", "usr-1:eth1"]
+  - endpoints: ["sw-1:eth4", "usr-3:eth1"]
+  - endpoints: ["sw-1:eth1", "sw-2:eth2"]
+  - endpoints: ["sw-1:eth3", "ctr:eth1"]
+VERSION: 2
+driver: veth
+PREFIX: 5S
+CONF_DIR: ./config
+MY_IMAGE: "tovs:1.1.2"
+PUBLISH_BASE: 9005
+SUBNET: '10.32.100.0/24'
+GATEWAY: '10.32.100.254'
+AUX_ADDRESSES: ['10.32.100.1', '10.32.100.2']

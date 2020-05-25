@@ -1,0 +1,23 @@
+links:
+  - endpoints: ["sw-1:eth0", "sw-2:eth0", "sw-3:eth0", "sw-4:eth0", "sw-5:eth0", "sw-6:eth0", "sw-7:eth0", "sw-8:eth0", "usr-1:eth0", "usr-2:eth0","usr-3:eth0", "ctr:eth0"]
+    driver: bridge
+  - endpoints: ["sw-1:eth1", "sw-2:eth1"]
+  - endpoints: ["sw-1:eth2", "sw-3:eth1"]
+  - endpoints: ["sw-2:eth2", "sw-4:eth1"]
+  - endpoints: ["sw-2:eth3", "sw-5:eth1"]
+  - endpoints: ["sw-3:eth2", "sw-6:eth1"]
+  - endpoints: ["sw-3:eth3", "sw-7:eth1"]
+  - endpoints: ["sw-4:eth2", "sw-8:eth1"]
+  - endpoints: ["sw-5:eth2", "usr-1:eth1"]
+  - endpoints: ["sw-6:eth2", "usr-2:eth1"]
+  - endpoints: ["sw-7:eth2", "usr-3:eth1"]
+  - endpoints: ["sw-1:eth3", "ctr:eth1"]
+VERSION: 2
+driver: veth
+PREFIX: PL
+CONF_DIR: ./config
+MY_IMAGE: "tovs:1.1.2"#"pritom_liz:3.1.0"#"pritom_liz:2.1.4"
+PUBLISH_BASE: 9005
+SUBNET: '10.34.100.0/24'
+GATEWAY: '10.34.100.254'
+AUX_ADDRESSES: ['10.34.100.1', '10.34.100.2']

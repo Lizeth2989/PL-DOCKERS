@@ -1,0 +1,153 @@
+export PATH=$PATH:/usr/local/share/openvswitch/scripts
+ovs-ctl start
+ovs-ctl status
+
+# clear arp table
+ip -s -s neigh flush all
+
+ENV PATH "$PATH:/usr/local/share/openvswitch/scripts"
+
+
+
+
+
+
+[QoS][INFO] dpid=00000ec628df7d41: Join qos switch. 1
+[QoS][INFO] dpid=00009ae9310bfa45: Join qos switch. 2
+[QoS][INFO] dpid=0000e27714197c4b: Join qos switch. 3
+
+udatapath/ofdatapath --datapath-id=00000ec628df7d41 --interfaces=foo  
+secchan/ofprotocol tcp:10.31.100.7 tcp:10.31.100.9
+utilities/dpctl tcp:<switch-host>:<switch-port> meter-mod cmd=add,meter=1 drop:rate=50
+
+
+
+curl -X POST -d '{"match": {"ip_dscp": "0", "in_port": "3"}, "actions":{"queue": "1"}}' http://localhost:8080/qos/rules/00000ec628df7d41
+curl -X POST -d '{"match": {"ip_dscp": "10", "in_port": "3"}, "actions":{"queue": "3"}}' http://localhost:8080/qos/rules/00000ec628df7d41
+curl -X POST -d '{"match": {"ip_dscp": "12", "in_port": "3"}, "actions":{"queue": "2"}}' http://localhost:8080/qos/rules/00000ec628df7d41
+curl -X POST -d '{"match": {"ip_dscp": "0", "in_port": "4"}, "actions":{"queue": "1"}}' http://localhost:8080/qos/rules/00000ec628df7d41
+curl -X POST -d '{"match": {"ip_dscp": "10", "in_port": "4"}, "actions":{"queue": "3"}}' http://localhost:8080/qos/rules/00000ec628df7d41
+curl -X POST -d '{"match": {"ip_dscp": "12", "in_port": "4"}, "actions":{"queue": "2"}}' http://localhost:8080/qos/rules/00000ec628df7d41
+
+
+curl -X POST -d '{"match": {"ip_dscp": "10"}, "actions":{"meter": "1"}}' http://localhost:8080/qos/rules/00009ae9310bfa45
+curl -X POST -d '{"meter_id": "1", "flags": "KBPS", "bands":[{"type":"DSCP_REMARK", "rate": "400", "prec_level": "1"}]}' http://localhost:8080/qos/meter/00009ae9310bfa45
+curl -X POST -d '{"match": {"ip_dscp": "10"}, "actions":{"meter": "1"}}' http://localhost:8080/qos/rules/0000e27714197c4b
+curl -X POST -d '{"meter_id": "1", "flags": "KBPS", "bands":[{"type":"DSCP_REMARK", "rate": "400", "prec_level": "1"}]}' http://localhost:8080/qos/meter/0000e27714197c4b
+
+
+#claear flow in sw
+ovs-ofctl -O OpenFlow13 del-flows foo
+
+
+
+all other
+ovs-ctl start
+ovs-vsctl add-br foo1
+ovs-vsctl set bridge foo1 protocols=OpenFlow13
+ovs-vsctl add-port foo1 eth0
+ovs-vsctl add-port foo1 eth1
+ovs-vsctl add-port foo1 eth2
+ovs-vsctl add-port foo1 eth3
+ifconfig eth0 0
+ifconfig eth0 down
+ifconfig foo1 up
+ifconfig foo1 10.36.100.5  netmask 255.255.255.0 up
+route add default gw 10.36.100.254 foo1
+ovs-vsctl set-controller foo tcp:10.31.100.9:6633
+ovs-vsctl set-manager tcp:10.36.100.4
+
+
+sw-1
+
+ovs-ctl start
+ovs-vsctl add-br foo
+ovs-vsctl set bridge foo protocols=OpenFlow13
+ovs-vsctl add-port foo eth0 
+ovs-vsctl add-port foo eth1
+ovs-vsctl add-port foo eth2
+ovs-vsctl add-port foo eth3
+ovs-vsctl add-port foo eth4
+ifconfig eth0 0
+ifconfig foo up
+ifconfig foo 10.35.100.7 netmask 255.255.255.0 up 
+route add default gw 10.35.100.254 foo
+ovs-vsctl set-controller foo tcp:10.35.100.7:6633 
+ovs-vsctl set-manager tcp:10.35.100.7
+
+udatapath/ofdatapath --datapath-id=0000a28385e92c41 --interfaces=foo,eth0,eth1,eth2,eth3 ptcp:<port>
+
+
+
+
+ovs-vsctl set bridge foo datapath_type=netdev
+ovs-vsctl set bridge foo protocols=OpenFlow13
+ifconfig eth0 down
+ovs-vsctl del-port foo eth0
+
+ovs-ctl start
+ovs-vsctl add-br foo
+ovs-vsctl set bridge foo datapath_type=netdev protocols=OpenFlow13
+ovs-vsctl add-port foo eth0
+ovs-vsctl add-port foo eth1
+ovs-vsctl add-port foo eth2
+ovs-vsctl add-port foo eth3
+ifconfig eth0 0
+ifconfig foo up
+ifconfig foo 10.31.100.4 netmask 255.255.255.0 up
+route add default gw 10.31.100.254 foo
+ovs-vsctl set-controller foo tcp:10.31.100.5:6633
+
+
+
+
+apt-get install -y automake autoconf gcc uml-utilities libtool build-essential pkg-config 
+
+From hl to h2
+TCP
+iperf -c 10.36.100.7 -p 5000 -i 1
+iperf -s -p 5000 -i 1
+
+UDP
+iperf -c 10.0.0.2 -p 5000 -u -i 1
+iperf -s -p 5000 -u -i 1
+
+
+apt-get install -y git-core autoconf automake autotools-dev pkg-config make gcc g++ libtool libc6-dev cmake libpcap-dev libxerces-c2-dev unzip libpcre3-dev flex bison libboost-dev
+
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -U scikit-learn
+#
+PYTHONPATH=. ../ryu/bin/ryu-manager --observe-links controller.py
+#run flask
+cd my_flask_app
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple virtualenv (if necessary)
+python3 -m venv venv
+source venv/bin/activate
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple Flask
+python -m flask --version
+export FLASK_APP=app
+flask run
+flask run -h 10.36.100.8 -p 8080
+# Dont forget to 
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple networkx
+
+#
+ryu-manager --observe-links controller.py
+# error address already in use
+ps -fA | grep python
+kill
+# visual
+
+in server
+cd /etc/ssh/ssh_config
+X11Forwarding yes
+X11DisplayOffset 10
+PrintMotd no
+PrintLastLog yes
+TCPKeepAlive yes
+
+in usr
+export DISPLAY=192.168.2.126:0.0
+sudo systemctl restart ssh
+
+
