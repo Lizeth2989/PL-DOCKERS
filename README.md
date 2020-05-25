@@ -1,11 +1,11 @@
-#PL_SDN
-#HOW TO RUN PL CMD
+# PL PROJECT - SDN 
+# HOW TO RUN Dockerfile 
 In order to run the pl command in an linux machine you can execute the following command:
 
 pip install git+https://github.com/pritom007/pl-topo.git
 Don't forget to upgarde pip. And also need to install Git beforehand.
 
-#HOW TO RUN A TREE TOPOLOGY
+# HOW TO RUN A TREE TOPOLOGY
 In order to run the tree topology first need to create a pl-tree.yml file where there are specific names of the containers and their configurations. By default, we have 3 kinds of images of containers:
 
 sw-1, sw-2 : These are the ovs-switches. sw-1 is considered as the core switch of the tree topology and has direct connection to the 'GATEWAY'.
@@ -37,7 +37,7 @@ A successful result will look like following-
 
 Screenshot
 
-#EDIT TOPOLOGY
+# EDIT TOPOLOGY
 In case of editing the topology, you can connect a new docker container to the existing topology using the following command. It uses namespace configurations with veth links.
 
 $> sh pl_c2c.sh <container_name1> <container_name2> <veth_name_at_container1> <veth_name_at_container2>
