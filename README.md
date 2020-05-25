@@ -1,3 +1,65 @@
+#PL_SDN
+#HOW TO RUN PL CMD
+In order to run the pl command in an linux machine you can execute the following command:
+
+pip install git+https://github.com/pritom007/pl-topo.git
+Don't forget to upgarde pip. And also need to install Git beforehand.
+
+#HOW TO RUN A TREE TOPOLOGY
+In order to run the tree topology first need to create a pl-tree.yml file where there are specific names of the containers and their configurations. By default, we have 3 kinds of images of containers:
+
+sw-1, sw-2 : These are the ovs-switches. sw-1 is considered as the core switch of the tree topology and has direct connection to the 'GATEWAY'.
+ctr: is the SDN controller with an image() including "ryu".
+usr-1,usr-2 : These are the hosts which contain basic ubuntu image with nping traffic generator. You can also generate this "pl-tree.yml" file from the setup.py file
+cmd to run pl-tree.yml-
+
+$> cd /home/shenyao1/TOPO/pritom_liz/All_Topology
+
+$> pl --create PL-tree.yml # don't need to add sudo here
+PL Help
+pl --help
+usage: pl [-h] [-d] [--create | --destroy] [-s] [-a] topology
+Tool to create docker topologies
+positional arguments:
+  topology       Topology file
+optional arguments:
+  -h, --help     show this help message and exit
+  -d, --debug    Enable Debug
+Actions:
+  Create or destroy topology
+  --create       Create topology
+  --destroy      Destroy topology
+Save:
+  Save or archive the topology
+  -s, --save     Save topology configs
+  -a, --archive  Archive topology file and configs
+A successful result will look like following-
+
+Screenshot
+
+#EDIT TOPOLOGY
+In case of editing the topology, you can connect a new docker container to the existing topology using the following command. It uses namespace configurations with veth links.
+
+$> sh pl_c2c.sh <container_name1> <container_name2> <veth_name_at_container1> <veth_name_at_container2>
+The command has 4 paramaters.
+
+<container_name1>: name of the existing container of tree topology.
+<container_name2>: name of the new container which will be connected.
+<veth_name_at_container1>: name of the new interface in the existing container.
+<veth_name_at_container2>: name of the new interface in the new container.
+SCRIPT TO CHANGE IP CONFIGURATIONS OF TOPOLOGY INTERFACES
+This script adds the eth interfaces to the OVS bridge (foo) and reconfigures the IPs, netmasks, and gateways of the containers, including sw, ctr, and usr.
+
+sudo command is mandatory to run this script. This is not working with python 2.7. Python3 is mandatory.
+
+$> sudo python3 ovs_br_script.py -file /home/shenyao1/TOPO/pritom_liz/All_Topology/PL-tree.yml
+A successful result will look like following- Screenshot
+
+To verify the OVS configuration, you can run the following command in "sw-X" containers.
+
+ovs-vsctl show
+
+
 File: pritom_liz/2.1.0-
   -with ubuntu image 2.1.0 is running ok. But use the 2.1.4 for the latest updates
   this is based on the new_sw13 folder
