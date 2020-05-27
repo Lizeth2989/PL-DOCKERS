@@ -3,7 +3,7 @@
 ## HOW TO RUN PL Command 
 In order to run the `pl` command in an linux machine you can execute the following command:
 ``` python
-pip install git+https://github.com/pritom007/pl-topo.git
+pip install git+https://github.com/PL-PROJECT-20/pl-topo.git
 ```
 Don't forget to upgarde `pip`. And also need to install Git beforehand.
 
