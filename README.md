@@ -45,7 +45,7 @@ Save:
 ```
 A successful result will look like following-
 
-![Screenshot](https://github.com/PL-PROJECT-20/PL-DOCKERS/edit/master/pl1.png)
+![Screenshot](https://github.com/PL-PROJECT-20/PL-DOCKERS/blob/master/pl1.png)
 
 ### EDIT TOPOLOGY 
 
@@ -71,7 +71,7 @@ This script adds the eth interfaces to the OVS bridge (foo) and reconfigures the
 $> sudo python3 ovs_br_script.py -file .../All_Topology/PL-tree.yml
 ```
 A successful result will look like following-
-![Screenshot](https://github.com/PL-PROJECT-20/PL-DOCKERS/edit/master/pl2.png)
+![Screenshot](https://github.com/PL-PROJECT-20/PL-DOCKERS/blob/master/pl2.png)
 
 To verify the OVS configuration, you can run the following command in "sw-X" containers.
 
