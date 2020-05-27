@@ -148,16 +148,29 @@ sudo docker commit 99583457a8b2 pritom_liz:2.1.4
 ```
 ### IMAGE DESCRIPTION: 
   -pritom_liz:2.2.0 has the ryu controller installed
+  
   -ovs-sw:latest   this image is with (new_sw13+ryu) just a checkpoint
+  
   -pritom_liz:2.2.1 has the ryu controller installed + nping traffic generator
+  
   -pritom_liz_centos:1.0.2 CentOS image + ovs (with supervisored)
+  
   -usr:1.1.1 user ubuntu image ifconfig + nping
+  
   -usr:1.1.2 user ubuntu image ifconfig+ping+iperf
+  
   -usr:1.1.3 user ubuntu image ifconfig+ping+iperf+ arp table command
+  
   -ryu_ovs:2.1.0 has ryu and ovs installed and it is a bit optimized. but the ovsdb is not running yet
+  
   -covs:1.0.0 make it default image. it has ovs and ryu controller and it is optimized.
+  
   -pritom_liz:2.5.1 has the ryu controller installed_ ovs services are running
+  
   -tovs:1.1.2 has ovs and supervisord. It came from 1.1.1 and then 1.1.0. Can be used in topology.
+  
   -tovs_ryu:1.1.0 has ovs and ryu. No supervisord installed
+  
   -tovs_ryu:1.1.2 has been executed. Can be used as ctr in the topology. No supervisord here. Came from tovs_ryu:1.1.1
+  
   -tovs_ryu:1.1.3 is the lastes came from the tovs_ryu:1.1.2. It a qos_simple_switch_13.py in the usr/local/lib/python2.7/dist-packages/ryu/app folder. 
