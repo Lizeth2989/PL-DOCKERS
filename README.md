@@ -19,7 +19,7 @@ In order to run the tree topology first need to create a `pl-tree.yml` file wher
 
 cmd to run `pl-tree.yml`-
 ``` bash
-$> cd /home/shenyao1/TOPO/pritom_liz/All_Topology
+$> cd .../All_Topology
 
 $> pl --create PL-tree.yml # don't need to add sudo here
 ```
@@ -45,7 +45,7 @@ Save:
 ```
 A successful result will look like following-
 
-![Screenshot](https://github.com/Lizeth2989/PL_SDN/blob/master/pl1.png)
+![Screenshot](https://github.com/PL-PROJECT-20/PL-DOCKERS/edit/master/pl1.png)
 
 ### EDIT TOPOLOGY 
 
@@ -68,10 +68,10 @@ This script adds the eth interfaces to the OVS bridge (foo) and reconfigures the
 `sudo` command is mandatory to run this script. This is not working with python 2.7. Python3 is mandatory.
 
 ``` bash
-$> sudo python3 ovs_br_script.py -file /home/shenyao1/TOPO/pritom_liz/All_Topology/PL-tree.yml
+$> sudo python3 ovs_br_script.py -file .../All_Topology/PL-tree.yml
 ```
 A successful result will look like following-
-![Screenshot](https://github.com/Lizeth2989/PL_SDN/blob/master/pl2.png)
+![Screenshot](https://github.com/PL-PROJECT-20/PL-DOCKERS/edit/master/pl2.png)
 
 To verify the OVS configuration, you can run the following command in "sw-X" containers.
 
