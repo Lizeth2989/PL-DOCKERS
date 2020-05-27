@@ -132,7 +132,7 @@ sudo docker build -t="pritom_liz:2.1.3" .
 
 ### RUN the image first time
 
-check docker image
+### check docker image
 
 ```bash
 sudo docker ps -a
