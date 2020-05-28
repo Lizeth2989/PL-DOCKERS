@@ -1,5 +1,20 @@
 # PL PROJECT - SDN 
 
+## HOW TO DOWNLOAD DOCKER IMAGES FROM DOCKER HUB TO YOUR SERVER
+In this project, we use 3 docker images that have been uploaded in docker hub. n order to download them, please use docker pull command.
+
+  1. sw-1, sw-2 : These are the ovs-switches. `sw-1` is considered as the core switch of the tree topology and has direct connection to the 'GATEWAY'.
+  2. ctr: is the SDN controller with an image() including "ryu".
+  3. usr-1,usr-2 : These are the hosts which contain basic ubuntu image with `nping` traffic generator.
+
+```
+https://hub.docker.com/orgs/plproject20/repositories
+
+sudo docker pull plproject20/usr:1.1.3
+sudo docker pull plproject20/tovs:1.1.4 
+sudo docker pull plproject20/ctr:1.0.1
+```
+
 ## HOW TO RUN PL Command 
 In order to run the `pl` command in an linux machine you can execute the following command:
 ``` python
@@ -7,15 +22,11 @@ pip install git+https://github.com/PL-PROJECT-20/pl-topo.git
 ```
 Don't forget to upgarde `pip`. And also need to install Git beforehand.
 
-
 ## HOW TO RUN A TREE TOPOLOGY
 
-In order to run the tree topology first need to create a `pl-tree.yml` file where there are specific names of the containers and their configurations. By default, we have 3 kinds of images of containers:
-  1. sw-1, sw-2 : These are the ovs-switches. `sw-1` is considered as the core switch of the tree topology and has direct connection to the 'GATEWAY'.
-  2. ctr: is the SDN controller with an image() including "ryu".
-  3. usr-1,usr-2 : These are the hosts which contain basic ubuntu image with `nping` traffic generator.
- You can also generate this "pl-tree.yml" file from the setup.py file
+In order to run the tree topology first need to create a `pl-tree.yml` file where there are specific names of the containers and their configurations. By default, we have 3 kinds of images of containers that should be downloaded in your server. 
 
+ You can also generate this "pl-tree.yml" file from the setup.py file
 
 cmd to run `pl-tree.yml`-
 ``` bash
